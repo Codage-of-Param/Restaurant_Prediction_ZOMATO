@@ -1,4 +1,4 @@
-#  ⚡Restaurant popularity prediction — Zomato Dataset
+#  ⚡Restaurant popularity prediction — [Zomato Dataset](https://github.com/Codage-of-Param/Restaurant-Popularity-Prediction/blob/main/backend/Zomato2.csv)
 
 A machine learning project that predicts restaurant ratings using Zomato data. It includes a trained scikit-learn model, a Streamlit dashboard for interactive predictions, a modular Python backend (`predictor.py`), and Supabase Storage integration for syncing model artifacts.
 
@@ -177,3 +177,7 @@ mv encoders.pkl backend/
 ## 📄 License
 
 This project is open source. Feel free to use it for learning, academic, or personal projects.
+
+## 📊 Dataset
+
+[Zomato Dataset](https://github.com/Codage-of-Param/Restaurant-Popularity-Prediction/blob/main/backend/Zomato2.csv)
