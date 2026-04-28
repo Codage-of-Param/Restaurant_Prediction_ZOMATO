@@ -65,7 +65,8 @@ export default function App() {
 
   // Fetch options from backend
   useEffect(() => {
-    fetch('http://localhost:8000/options')
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+    fetch(`${API_BASE}/options`)
       .then(res => res.json())
       .then(data => {
         setModelOptions(data || { cities: [], cuisines: [] });
@@ -110,7 +111,8 @@ export default function App() {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/predict', {
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_BASE}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -153,7 +155,8 @@ export default function App() {
         city: city,
         cuisines: selectedCuisines.join(',')
       }).toString();
-      const response = await fetch(`http://localhost:8000/benchmarks?${qs}`);
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_BASE}/benchmarks?${qs}`);
       const json = await response.json();
       if (json.error) throw new Error(json.error);
       setBenchmarkItems(json.data || []);
