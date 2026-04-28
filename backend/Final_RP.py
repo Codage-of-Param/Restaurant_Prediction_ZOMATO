@@ -77,9 +77,9 @@ def main():
 
     # --- NEW: Cuisine Engineering ---
     # 1. Count of Cuisines
-    df['cuisine_count'] = df['Cuisines'].apply(lambda x: len(str(x).split(',')))
+    df['cuisine_count'] = df['Cuisines'].apply(lambda x: len(str(x).split('|')))
     # 2. Primary Cuisine (The first mentioned)
-    df['primary_cuisine'] = df['Cuisines'].apply(lambda x: str(x).split(',')[0].strip())
+    df['primary_cuisine'] = df['Cuisines'].apply(lambda x: str(x).split('|')[0].strip())
 
     # Map Countries
     country_map = {

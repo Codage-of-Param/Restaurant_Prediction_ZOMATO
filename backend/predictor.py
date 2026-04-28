@@ -68,7 +68,9 @@ def build_feature_row(
     primary_cuisine = cuisine_list[0] if cuisine_list else "Unknown"
 
     # 2. Encoding
-    city_enc, w1 = _encode_or_fallback(enc.get("City"), city)
+    # Handle "City, India" format from frontend
+    city_clean = city.split(",")[0].strip()
+    city_enc, w1 = _encode_or_fallback(enc.get("City"), city_clean)
     if w1: warnings.append(w1)
     
     primary_cuisine_enc, w2 = _encode_or_fallback(enc.get("primary_cuisine"), primary_cuisine)

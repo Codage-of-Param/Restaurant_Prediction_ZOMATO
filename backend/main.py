@@ -31,6 +31,9 @@ class PredictRequest(BaseModel):
     online_ordering: bool = True
     table_booking: bool = False
     delivering_now: bool = False
+    min_rating: Optional[float] = 0.0
+    price_label: Optional[str] = "Affordable"
+    votes: Optional[int] = 0
 
 class PredictResponse(BaseModel):
     restaurant_name: str

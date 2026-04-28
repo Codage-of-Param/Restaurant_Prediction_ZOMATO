@@ -117,6 +117,12 @@ export default function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || `Server error: ${response.status}`);
+      }
+
       const data = await response.json();
       
       const safeScore = (data.popularity_percent !== undefined && !isNaN(data.popularity_percent)) ? Math.round(data.popularity_percent) : 0;
@@ -127,10 +133,9 @@ export default function App() {
       setSuccessLabel(data.success_label || 'READY');
     } catch (e) {
       console.error("Prediction failed", e);
-      // Fallback for demo
-      setScore(78);
-      setPredictedRating(4.1);
-      setSuccessLabel("GOOD POTENTIAL");
+      setValidationError(`Prediction failed: ${e.message}. Please ensure the backend is running and accessible.`);
+      setScore(null);
+      setPredictedRating(0);
     }
     setLoading(false);
   };
@@ -148,8 +153,13 @@ export default function App() {
 
   const fetchBenchmarks = async () => {
     setLoadingBenchmarks(true);
+    setValidationError(null);
     try {
-      if (!city || typeof city !== 'string') throw new Error("Invalid city");
+      if (!city || city === 'Select city...') {
+        setBenchmarkItems([]);
+        setLoadingBenchmarks(false);
+        return;
+      }
       
       const qs = new URLSearchParams({
         city: city,
@@ -157,11 +167,17 @@ export default function App() {
       }).toString();
       const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
       const response = await fetch(`${API_BASE}/benchmarks?${qs}`);
+      
+      if (!response.ok) {
+        throw new Error(`Benchmarks error: ${response.status}`);
+      }
+
       const json = await response.json();
       if (json.error) throw new Error(json.error);
       setBenchmarkItems(json.data || []);
     } catch (e) {
       console.error("Could not fetch benchmarks", e);
+      setValidationError(`Could not fetch benchmarks: ${e.message}`);
       setBenchmarkItems([]); 
     }
     setLoadingBenchmarks(false);

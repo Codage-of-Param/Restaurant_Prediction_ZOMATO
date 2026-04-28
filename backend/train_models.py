@@ -23,8 +23,8 @@ def load_and_preprocess():
     # Log transform cost
     df['avg_cost_for_two'] = np.log1p(df['avg_cost_for_two'])
     # Cuisine features
-    df['cuisine_count'] = df['Cuisines'].apply(lambda x: len(str(x).split(',')))
-    df['primary_cuisine'] = df['Cuisines'].apply(lambda x: str(x).split(',')[0].strip())
+    df['cuisine_count'] = df['Cuisines'].apply(lambda x: len(str(x).split('|')))
+    df['primary_cuisine'] = df['Cuisines'].apply(lambda x: str(x).split('|')[0].strip())
     # Encode categorical columns
     label_cols = ['City', 'primary_cuisine', 'country']
     encoders = {}
