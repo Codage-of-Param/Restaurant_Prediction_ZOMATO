@@ -80,7 +80,7 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 # Optional — only needed if artifacts are stored in a subfolder
-SUPABASE_BUCKET=ml-artifacts
+SUPABASE_BUCKET=your_supabase_bucket_name
 SUPABASE_ARTIFACT_PREFIX=runs/2026-04-19
 ```
 
@@ -140,8 +140,8 @@ Model artifacts (`model.pkl`, `encoders.pkl`) can be synced to/from Supabase Sto
 
 **Upload:**
 ```bash
-python sync_supabase.py upload-artifacts --bucket ml-artifacts
-python sync_supabase.py upload-artifacts --bucket ml-artifacts --prefix runs/2026-04-19
+python sync_supabase.py upload-artifacts --bucket your_supabase_bucket_name
+python sync_supabase.py upload-artifacts --bucket your_supabase_bucket_name --prefix runs/2026-04-19
 ```
 
 **Download:**
