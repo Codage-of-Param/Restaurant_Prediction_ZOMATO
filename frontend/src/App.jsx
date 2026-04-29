@@ -681,17 +681,17 @@ export default function App() {
                 </div>
 
                 {/* ADDITIONAL PERFORMANCE BENCHMARKS */}
-                <div style={{gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 16, marginTop: 12}}>
-                   <div className="premium-card" style={{padding: '24px', textAlign: 'center'}}>
-                      <div style={{fontSize: 10, color: 'var(--text-muted)', fontWeight: 800, marginBottom: 8, letterSpacing: 1}}>AVG. MARKET RATING</div>
-                      <div style={{fontSize: 24, fontWeight: 900, color: 'var(--text-main)'}}>
+                <div className="benchmark-metrics-grid">
+                   <div className="premium-card benchmark-metric-card">
+                      <div className="benchmark-metric-label">AVG. MARKET RATING</div>
+                      <div className="benchmark-metric-value">
                         {(benchmarkItems.reduce((acc, curr) => acc + curr.rating, 0) / benchmarkItems.length).toFixed(1)}
                         <span style={{fontSize: 14, color: 'var(--accent-orange)', marginLeft: 4}}>★</span>
                       </div>
                    </div>
-                   <div className="premium-card" style={{padding: '24px', textAlign: 'center'}}>
-                      <div style={{fontSize: 10, color: 'var(--text-muted)', fontWeight: 800, marginBottom: 8, letterSpacing: 1}}>PRICE DOMINANCE</div>
-                      <div style={{fontSize: 18, fontWeight: 900, color: 'var(--text-main)', textTransform: 'uppercase'}}>
+                   <div className="premium-card benchmark-metric-card">
+                      <div className="benchmark-metric-label">PRICE DOMINANCE</div>
+                      <div className="benchmark-metric-value" style={{textTransform: 'uppercase'}}>
                         {(() => {
                            const counts = {};
                            benchmarkItems.forEach(i => counts[i.price_range] = (counts[i.price_range] || 0) + 1);
@@ -700,9 +700,9 @@ export default function App() {
                         })()}
                       </div>
                    </div>
-                   <div className="premium-card" style={{padding: '24px', textAlign: 'center'}}>
-                      <div style={{fontSize: 10, color: 'var(--text-muted)', fontWeight: 800, marginBottom: 8, letterSpacing: 1}}>COMPETITION LEVEL</div>
-                      <div style={{fontSize: 18, fontWeight: 900, color: 'var(--accent-orange)', wordBreak: 'break-word'}}>HIGH DENSITY</div>
+                   <div className="premium-card benchmark-metric-card">
+                      <div className="benchmark-metric-label">COMPETITION LEVEL</div>
+                      <div className="benchmark-metric-value" style={{color: 'var(--accent-orange)', wordBreak: 'break-word'}}>HIGH DENSITY</div>
                    </div>
                 </div>
               </div>
